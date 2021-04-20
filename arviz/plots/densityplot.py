@@ -17,6 +17,7 @@ def plot_density(
     group="posterior",
     data_labels=None,
     var_names=None,
+    combine_dims=[],
     transform=None,
     hdi_prob=None,
     point_estimate="auto",
@@ -57,6 +58,8 @@ def plot_density(
         List of variables to plot.  If multiple datasets are supplied and var_names is not None,
         will print the same set of variables for each dataset.  Defaults to None, which results in
         all the variables being plotted.
+    combine_dims : Optional[List[str]]
+        List of dimensions to flatten. Defaults to flattening none of the dimensions.
     transform : callable
         Function to transform data (defaults to None i.e. the identity function)
     hdi_prob : float
@@ -199,7 +202,7 @@ def plot_density(
         if not 1 >= hdi_prob > 0:
             raise ValueError("The value of hdi_prob should be in the interval (0, 1]")
 
-    to_plot = [list(xarray_var_iter(data, var_names, combined=True)) for data in datasets]
+    to_plot = [list(xarray_var_iter(data, var_names, combined=True, skip_dims=set(combine_dims))) for data in datasets]
     all_labels = []
     length_plotters = []
     for plotters in to_plot:
