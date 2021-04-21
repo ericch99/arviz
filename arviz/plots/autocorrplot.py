@@ -42,7 +42,7 @@ def plot_autocorr(
         interpret var_names as substrings of the real variables names. If "regex",
         interpret var_names as regular expressions on the real variables names. A la
         `pandas.filter`.
-    combine_dims :list, optional
+    combine_dims: list, optional
         List of dimensions to flatten. Defaults to flattening none of the dimensions.
     max_lag: int, optional
         Maximum lag to calculate autocorrelation. Defaults to 100 or num draws, whichever is smaller
