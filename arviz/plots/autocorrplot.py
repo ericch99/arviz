@@ -11,7 +11,6 @@ def plot_autocorr(
     data,
     var_names=None,
     filter_vars=None,
-    combine_dims=[],
     max_lag=None,
     combined=False,
     grid=None,
@@ -42,8 +41,6 @@ def plot_autocorr(
         interpret var_names as substrings of the real variables names. If "regex",
         interpret var_names as regular expressions on the real variables names. A la
         `pandas.filter`.
-    combine_dims: list, optional
-        List of dimensions to flatten. Defaults to flattening none of the dimensions.
     max_lag: int, optional
         Maximum lag to calculate autocorrelation. Defaults to 100 or num draws, whichever is smaller
     combined: bool
@@ -123,7 +120,7 @@ def plot_autocorr(
         labeller = BaseLabeller()
 
     plotters = filter_plotters_list(
-        list(xarray_var_iter(data, var_names, combined, skip_dims=set(combine_dims))), "plot_autocorr"
+        list(xarray_var_iter(data, var_names, combined)), "plot_autocorr"
     )
     rows, cols = default_grid(len(plotters), grid=grid)
 
